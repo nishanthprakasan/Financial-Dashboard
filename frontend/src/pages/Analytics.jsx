@@ -1,0 +1,4 @@
+function Analytics(){
+
+}
+export { Analytics };
