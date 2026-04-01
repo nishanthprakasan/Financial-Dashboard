@@ -1,4 +1,4 @@
-import { configDotenv } from "dotenv";
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -10,7 +10,10 @@ import settingsRouter from "./routes/settingsRouter.js";
 import analyticsRouter from "./routes/analyticsRouter.js"
 import aiRouter from "./routes/aiRouter.js"
 
-configDotenv();
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
+
 const app = express();
 const PORT = process.env.PORT;
 
