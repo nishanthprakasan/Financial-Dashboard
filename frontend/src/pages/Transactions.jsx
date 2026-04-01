@@ -36,10 +36,12 @@ export function Transactions() {
 
   const fetchTransactions = async () => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         "https://financial-dashboard-ytrl.onrender.com/api/transactions",
         {
           credentials: "include",
+          headers: { Authorization: `Bearer ${token}` },
         },
       );
       const data = await response.json();
@@ -58,6 +60,7 @@ export function Transactions() {
 
   const handleAddTransaction = async (transactionData) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         "https://financial-dashboard-ytrl.onrender.com/api/transactions",
         {
@@ -65,6 +68,7 @@ export function Transactions() {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(transactionData),
         },
@@ -118,6 +122,7 @@ export function Transactions() {
 
   const handleEditTransaction = async (id, updates) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `https://financial-dashboard-ytrl.onrender.com/api/transactions/${id}`,
         {
@@ -125,6 +130,7 @@ export function Transactions() {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(updates),
         },
