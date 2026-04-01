@@ -3,9 +3,12 @@ import authMiddleware from "../middleware/authMiddleware.js";
 import settingsController from "../controllers/settings.js";
 
 const router = Router();
-const { handleUserUpdate, handleSettings } = settingsController;
 
 router.use(authMiddleware);
-router.route("/").get(handleSettings).patch(handleUserUpdate);
+
+router.get("/", settingsController.handleSettings);
+router.patch("/", settingsController.handleUserUpdate);
+router.patch("/password", settingsController.handlePasswordChange);
+router.delete("/delete", settingsController.handleAccountDeletion);
 
 export default router;

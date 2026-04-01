@@ -7,6 +7,8 @@ import authRouter from "./routes/authRouter.js";
 import dashboardRouter from "./routes/dashboardRouter.js";
 import transactionRouter from "./routes/transactionsRouter.js";
 import settingsRouter from "./routes/settingsRouter.js";
+import analyticsRouter from "./routes/analyticsRouter.js"
+import aiRouter from "./routes/aiRouter.js"
 
 configDotenv();
 const app = express();
@@ -31,6 +33,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api/transactions", transactionRouter);
 app.use("/api/settings", settingsRouter);
+app.use("/api/analytics", analyticsRouter);
+app.use("/api/ai", aiRouter)
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
