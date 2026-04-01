@@ -93,6 +93,7 @@ export function Onboarding() {
   };
 
   const handleSubmit = async () => {
+    const token = localStorage.getItem("token")
     try {
       const response = await fetch(
         "https://financial-dashboard-ytrl.onrender.com/api/auth/complete-onboarding",
@@ -101,6 +102,7 @@ export function Onboarding() {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             ...formData,
