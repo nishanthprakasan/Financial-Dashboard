@@ -5,23 +5,25 @@ export default function NotificationSection({ data, onUpdate }) {
   const [prefs, setPrefs] = useState(data.notificationPreferences);
   const [saving, setSaving] = useState(false);
 
-  const toggle = (key) =>
-    setPrefs((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggle = (key) => setPrefs((prev) => ({ ...prev, [key]: !prev[key] }));
 
   const saveNotif = async () => {
     setSaving(true);
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/settings", {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/settings",
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ notificationPreferences: prefs }),
         },
-        body: JSON.stringify({ notificationPreferences: prefs }),
-      });
+      );
 
       const result = await res.json();
 
@@ -47,7 +49,9 @@ export default function NotificationSection({ data, onUpdate }) {
           <Bell className="h-5 w-5 text-blue-600" />
           Notifications
         </h2>
-        <p className="text-slate-600 text-sm mt-1">Manage alerts and updates.</p>
+        <p className="text-slate-600 text-sm mt-1">
+          Manage alerts and updates.
+        </p>
       </div>
 
       <div className="space-y-4">

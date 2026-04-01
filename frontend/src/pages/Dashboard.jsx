@@ -19,12 +19,15 @@ function Dashboard() {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8000/api/dashboard", {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/dashboard",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
         },
-        credentials: "include",
-      });
+      );
       const data = await response.json();
       if (data.success) {
         setDashboardData(data.data);
@@ -36,7 +39,7 @@ function Dashboard() {
     }
   };
 
-  if (loading ) {
+  if (loading) {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">

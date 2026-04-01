@@ -34,22 +34,27 @@ export function AIChat() {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8000/api/ai/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/ai/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+          body: JSON.stringify({ message: userMessage }),
         },
-        credentials: "include",
-        body: JSON.stringify({ message: userMessage }),
-      });
+      );
 
       const data = await response.json();
       setMessages((prev) => [
         ...prev,
         {
           role: "ai",
-          text: data.success ? data.reply : "Sorry, I couldn't process that. Try again.",
+          text: data.success
+            ? data.reply
+            : "Sorry, I couldn't process that. Try again.",
         },
       ]);
     } catch (error) {
@@ -71,7 +76,6 @@ export function AIChat() {
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
-
         {/* Suggestion chips */}
         <div className="flex flex-wrap gap-2 mb-4">
           {SUGGESTIONS.map((s) => (
@@ -131,7 +135,6 @@ export function AIChat() {
             <Send className="h-4 w-4" />
           </button>
         </div>
-
       </CardContent>
     </Card>
   );

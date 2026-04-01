@@ -95,7 +95,7 @@ export function Onboarding() {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/auth/complete-onboarding",
+        "https://financial-dashboard-ytrl.onrender.com/api/auth/complete-onboarding",
         {
           method: "POST",
           credentials: "include",
@@ -106,7 +106,7 @@ export function Onboarding() {
             ...formData,
             monthlyIncome: parseFloat(formData.monthlyIncome) || 0,
           }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -326,7 +326,7 @@ export function Onboarding() {
                       />
                     </button>
                   </div>
-                )
+                ),
               )}
             </div>
           </div>

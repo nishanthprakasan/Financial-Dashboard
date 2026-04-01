@@ -10,13 +10,16 @@ export default function AccountSection() {
     try {
       const token = localStorage.getItem("token");
 
-      await fetch("http://localhost:8000/api/settings/delete", {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/settings/delete",
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       logout();
       window.location.href = "/login";
@@ -40,7 +43,11 @@ export default function AccountSection() {
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
         <p className="text-slate-700">
           Email Verified:{" "}
-          <span className={user.emailVerified ? "text-green-600" : "text-red-600 font-medium"}>
+          <span
+            className={
+              user.emailVerified ? "text-green-600" : "text-red-600 font-medium"
+            }
+          >
             {user.emailVerified ? "Yes" : "No"}
           </span>
         </p>

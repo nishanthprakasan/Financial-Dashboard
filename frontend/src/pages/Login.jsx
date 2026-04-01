@@ -24,14 +24,17 @@ export function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
 
       const data = await response.json();
       console.log(data);
@@ -39,7 +42,7 @@ export function Login() {
       if (data.success) {
         console.log("Login successful:", data);
         login(data.user, data.token);
-        window.location.href = "/"; 
+        window.location.href = "/";
       } else {
         console.error("Login failed:", data.message);
         alert(data.message || "Login failed");
@@ -56,7 +59,7 @@ export function Login() {
     const userData = jwtDecode(response.credential);
     console.log("User data:", userData);
 
-    fetch("http://localhost:8000/api/auth/google", {
+    fetch("https://financial-dashboard-ytrl.onrender.com/api/auth/google", {
       method: "POST",
       credentials: "include",
       headers: {

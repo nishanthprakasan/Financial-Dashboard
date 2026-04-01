@@ -17,12 +17,15 @@ export function Settings() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/settings", {
-        credentials: "include",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/settings",
+        {
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       const data = await res.json();
       if (data.success) {
@@ -61,9 +64,7 @@ export function Settings() {
 
         <ProfileSection data={settingsData} onUpdate={setSettingsData} />
 
-        {settingsData?.loginMethod === "email" && (
-          <SecuritySection />
-        )}
+        {settingsData?.loginMethod === "email" && <SecuritySection />}
 
         <PreferencesSection data={settingsData} onUpdate={setSettingsData} />
 

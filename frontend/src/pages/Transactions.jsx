@@ -36,9 +36,12 @@ export function Transactions() {
 
   const fetchTransactions = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/transactions", {
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/transactions",
+        {
+          credentials: "include",
+        },
+      );
       const data = await response.json();
       if (data.success) {
         setTransactions(data.transactions);
@@ -55,14 +58,17 @@ export function Transactions() {
 
   const handleAddTransaction = async (transactionData) => {
     try {
-      const response = await fetch("http://localhost:8000/api/transactions", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/transactions",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(transactionData),
         },
-        body: JSON.stringify(transactionData),
-      });
+      );
       const data = await response.json();
       if (data.success) {
         await fetchTransactions();
@@ -87,11 +93,11 @@ export function Transactions() {
   const handleDeleteTransaction = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/transactions/${id}`,
+        `https://financial-dashboard-ytrl.onrender.com/api/transactions/${id}`,
         {
           method: "DELETE",
           credentials: "include",
-        }
+        },
       );
       const data = await response.json();
       if (data.success) {
@@ -113,7 +119,7 @@ export function Transactions() {
   const handleEditTransaction = async (id, updates) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/transactions/${id}`,
+        `https://financial-dashboard-ytrl.onrender.com/api/transactions/${id}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -121,7 +127,7 @@ export function Transactions() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updates),
-        }
+        },
       );
       const data = await response.json();
       if (data.success) {

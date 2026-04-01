@@ -35,15 +35,18 @@ export default function PreferencesSection({ data, onUpdate }) {
       setSaving(true);
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/settings", {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/settings",
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(form),
         },
-        body: JSON.stringify(form),
-      });
+      );
 
       const result = await res.json();
 
@@ -62,7 +65,9 @@ export default function PreferencesSection({ data, onUpdate }) {
           <SlidersHorizontal className="h-5 w-5 text-blue-600" />
           Preferences
         </h2>
-        <p className="text-slate-600 text-sm mt-1">Customize your app preferences.</p>
+        <p className="text-slate-600 text-sm mt-1">
+          Customize your app preferences.
+        </p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
@@ -74,7 +79,17 @@ export default function PreferencesSection({ data, onUpdate }) {
             value={form.currency}
             onChange={(e) => setForm({ ...form, currency: e.target.value })}
           >
-            {["USD", "EUR", "GBP", "INR", "CAD", "AUD", "JPY", "CNY", "SGD"].map((currency) => (
+            {[
+              "USD",
+              "EUR",
+              "GBP",
+              "INR",
+              "CAD",
+              "AUD",
+              "JPY",
+              "CNY",
+              "SGD",
+            ].map((currency) => (
               <option key={currency}>{currency}</option>
             ))}
           </select>
@@ -82,13 +97,22 @@ export default function PreferencesSection({ data, onUpdate }) {
 
         {/* Usage Purpose */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Usage Purpose</label>
+          <label className="text-sm font-medium text-slate-700">
+            Usage Purpose
+          </label>
           <select
             className="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
             value={form.usagePurpose}
             onChange={(e) => setForm({ ...form, usagePurpose: e.target.value })}
           >
-            {["personal", "business", "freelancer", "student", "family", "other"].map((option) => (
+            {[
+              "personal",
+              "business",
+              "freelancer",
+              "student",
+              "family",
+              "other",
+            ].map((option) => (
               <option key={option}>{option}</option>
             ))}
           </select>
@@ -96,19 +120,25 @@ export default function PreferencesSection({ data, onUpdate }) {
 
         {/* Monthly Income */}
         <div className="space-y-2 md:col-span-2">
-          <label className="text-sm font-medium text-slate-700">Monthly Income</label>
+          <label className="text-sm font-medium text-slate-700">
+            Monthly Income
+          </label>
           <input
             type="number"
             className="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
             value={form.monthlyIncome}
-            onChange={(e) => setForm({ ...form, monthlyIncome: e.target.value })}
+            onChange={(e) =>
+              setForm({ ...form, monthlyIncome: e.target.value })
+            }
           />
         </div>
       </div>
 
       {/* Goals */}
       <div>
-        <label className="text-sm font-medium text-slate-700">Financial Goals</label>
+        <label className="text-sm font-medium text-slate-700">
+          Financial Goals
+        </label>
         <div className="flex flex-wrap gap-2 mt-2">
           {GOALS.map((goal) => {
             const active = form.financialGoals.includes(goal);

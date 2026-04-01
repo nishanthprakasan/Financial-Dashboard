@@ -20,15 +20,18 @@ export default function ProfileSection({ data, onUpdate }) {
       setSaving(true);
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/settings", {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/settings",
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(form),
         },
-        body: JSON.stringify(form),
-      });
+      );
 
       const result = await res.json();
       if (result.success) {
@@ -63,7 +66,9 @@ export default function ProfileSection({ data, onUpdate }) {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Avatar URL</label>
+          <label className="text-sm font-medium text-slate-700">
+            Avatar URL
+          </label>
           <div className="flex gap-2">
             <input
               className="flex-1 border border-slate-300 focus:ring-2 focus:ring-blue-500 rounded-lg p-2 transition"
@@ -89,14 +94,26 @@ export default function ProfileSection({ data, onUpdate }) {
             value={form.currency}
             onChange={handleChange}
           >
-            {["USD", "EUR", "GBP", "INR", "CAD", "AUD", "JPY", "CNY", "SGD"].map((c) => (
+            {[
+              "USD",
+              "EUR",
+              "GBP",
+              "INR",
+              "CAD",
+              "AUD",
+              "JPY",
+              "CNY",
+              "SGD",
+            ].map((c) => (
               <option key={c}>{c}</option>
             ))}
           </select>
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Monthly Income</label>
+          <label className="text-sm font-medium text-slate-700">
+            Monthly Income
+          </label>
           <input
             type="number"
             className="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"

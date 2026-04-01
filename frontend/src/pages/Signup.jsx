@@ -12,7 +12,7 @@ export function Signup() {
     password: "",
     confirmPassword: "",
   });
-  
+
   const { login } = useAuth();
 
   const handleChange = (e) => {
@@ -39,18 +39,21 @@ export function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/auth/signup", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/auth/signup",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+          }),
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      );
 
       const data = await response.json();
 

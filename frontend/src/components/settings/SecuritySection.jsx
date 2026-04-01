@@ -18,15 +18,18 @@ export default function SecuritySection() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/settings/password", {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://financial-dashboard-ytrl.onrender.com/api/settings/password",
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(form),
         },
-        body: JSON.stringify(form),
-      });
+      );
 
       const result = await res.json();
 
@@ -56,7 +59,9 @@ export default function SecuritySection() {
 
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Current Password</label>
+          <label className="text-sm font-medium text-slate-700">
+            Current Password
+          </label>
           <input
             type="password"
             name="currentPassword"
@@ -68,7 +73,9 @@ export default function SecuritySection() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">New Password</label>
+          <label className="text-sm font-medium text-slate-700">
+            New Password
+          </label>
           <input
             type="password"
             name="newPassword"
@@ -80,7 +87,9 @@ export default function SecuritySection() {
         </div>
 
         <div className="space-y-2 md:col-span-2">
-          <label className="text-sm font-medium text-slate-700">Confirm Password</label>
+          <label className="text-sm font-medium text-slate-700">
+            Confirm Password
+          </label>
           <input
             type="password"
             name="confirmPassword"
